@@ -1,21 +1,59 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
-}
+
+    constructor(props){
+        super(props);
+        this.state = {
+            counter: 1
+        }
+    }
+
+
+    add(){
+        console.log(this.state.counter);
+        this.setState({
+            counter: this.state.counter+1
+        })
+    };
+
+    sub(){
+        console.log(this.state.counter);
+        this.setState({
+            counter: this.state.counter-1
+        })
+    }
+
+
+
+    render(){
+
+        return (
+            <div>
+                <h1>Counter</h1>
+
+                <div className="output">
+                <h2>{this.state.counter}</h2>
+                </div>
+
+                <button 
+                    className="btn"
+                    onClick={()=>this.add()}
+                >
+                    +
+                </button>
+
+                <button
+                    className="btn"
+                    onClick={()=>this.sub()}
+                >
+                    -
+                </button>
+
+          </div>
+        );
+    };
+
+};
 
 export default App;
