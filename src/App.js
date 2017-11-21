@@ -1,39 +1,38 @@
 import React, {Component} from 'react';
+import {connect} from "react-redux";
+import { actionCreatorAdd, actionCreatorSub } from "./actions/index";
+import { bindActionCreators } from 'redux';
 
 class App extends Component {
 
     constructor(props){
         super(props);
         this.state = {
-            counter: 1
+            counter: 0
         }
     }
 
 
     add(){
-        console.log(this.state.counter);
-        this.setState({
-            counter: this.state.counter+1
-        })
+        console.log('this', this);
+        this.props.actionCreatorAdd();
     };
 
     sub(){
-        console.log(this.state.counter);
-        this.setState({
-            counter: this.state.counter-1
-        })
+        console.log('this 2: ', this);
+        this.props.actionCreatorSub();
+        
     }
 
 
-
     render(){
-
+        console.log("TOOOOOOOOOOOOOOO",this.props.counter);
         return (
             <div>
                 <h1>Counter</h1>
 
                 <div className="output">
-                <h2>{this.state.counter}</h2>
+                <h2>{this.props.counter}</h2>
                 </div>
 
                 <button 
@@ -56,4 +55,16 @@ class App extends Component {
 
 };
 
-export default App;
+function mapStateToProps(state){
+    console.log("app.js , state:", state);
+    return {
+             counter: state
+           };
+}
+
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({actionCreatorAdd, actionCreatorSub}, dispatch);
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
